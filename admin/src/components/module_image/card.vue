@@ -13,10 +13,13 @@
 </template>
 
 <script>
+import url_prefix from '../../assets/config.js';
+
 export default {
     name: 'Card',
     props: {
-        data: Object
+        data: Object,
+        url_prefix: url_prefix
     },
     data(){
         return {
@@ -24,11 +27,13 @@ export default {
         }
     },
     methods: {
+        // 开启mask遮罩
         toggleModal(dom){
             $('#exampleModal').modal('toggle');
             let id = this.$data.cardData.image_ID;
             sessionStorage.setItem("image_id", id);
         },
+        // 切换APP首页轮播图是否显示
         toggleStatus(){
             if(this.cardData.image_Is_Used == 1){
                 this.cardData.image_Is_Used = 0;
@@ -36,7 +41,7 @@ export default {
                 this.cardData.image_Is_Used = 1;
             }
 
-            this.$http.post("http://192.168.1.113:8080/yong/ImageChangeServlet", {
+            this.$http.post(this.url_prefix + "ImageChangeServlet", {
                 status: this.cardData.image_Is_Used,
                 id: this.cardData.image_ID
             },{emulateJSON: true}

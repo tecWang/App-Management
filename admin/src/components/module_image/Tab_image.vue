@@ -17,9 +17,8 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                    <form  action="http://localhost:8080/yong/UploadServlet"  
+                    <form  :action="url_prefix + 'UploadServlet'"  
                             method="post" enctype="multipart/form-data">  
-                            <!-- <input type="file" name="txt_file" id="txt_file" multiple class="file-loading" /> -->
                             <input type="submit" name="name"> <input type="file" name="file1">  
                     </form>
                 </div>
@@ -60,7 +59,9 @@
 <script>
 import Split from "./split.vue";
 import Card from "./card.vue";
-import Template from "../assets/template.js";
+import Template from "../../assets/template.js";
+
+import url_prefix from '../../assets/config';
 
 export default {
   name: 'Tab_image',
@@ -68,19 +69,21 @@ export default {
         return {
             cards: [],
             changedLink: "",
+            url_prefix: url_prefix
         }
   },
   mounted: function(){
-    
-        this.$http.get('http://192.168.1.113:8080/yong/UploadServlet').then(response => {
+        // 渲染图片模块首页的cards
+        this.$http.get(this.url_prefix + "UploadServlet").then(response => {
              this.cards = response.data.data;
         }, response => {
             console.log("error");
         });
   },
   methods: {
+        // 修改图片地址指向  
         sendCardMsg: function(){
-            this.$http.post('http://192.168.1.113:8080/yong/ImageChangeServlet', 
+            this.$http.post(this.url_prefix + 'ImageChangeServlet', 
             {
                 id: sessionStorage.getItem('image_id'),
                 newLink: this.changedLink

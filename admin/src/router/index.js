@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Title from '@/components/Title'
-import Tab_image from '@/components/Tab_image'
-import Tab_func2 from '@/components/Tab_func2'
+
+import Tab_image from '@/components/module_image/Tab_image'       // 图片模块路由
+import Tab_func2 from '@/components/module_contract/Tab_func2'    // 合同模块路由
+
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/link1',
       name: 'Tab_image',
       component: Tab_image
     },
