@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import url_prefix from '../../assets/config.js';
+import config from '../../assets/config.js';
 
 export default {
     name: 'Card',
     props: {
         data: Object,
-        url_prefix: url_prefix
+        url_prefix: config.url_prefix
     },
     data(){
         return {
@@ -41,7 +41,7 @@ export default {
                 this.cardData.image_Is_Used = 1;
             }
 
-            this.$http.post(this.url_prefix + "ImageChangeServlet", {
+            this.$http.post(this.url_prefix + "ImageServlet", {
                 status: this.cardData.image_Is_Used,
                 id: this.cardData.image_ID
             },{emulateJSON: true}

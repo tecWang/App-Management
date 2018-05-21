@@ -61,7 +61,7 @@ import Split from "./split.vue";
 import Card from "./card.vue";
 import Template from "../../assets/template.js";
 
-import url_prefix from '../../assets/config';
+import config from '../../assets/config';
 
 export default {
   name: 'Tab_image',
@@ -69,16 +69,16 @@ export default {
         return {
             cards: [],
             changedLink: "",
-            url_prefix: url_prefix
+            url_prefix: config.url_prefix
         }
   },
   mounted: function(){
         // 渲染图片模块首页的cards
-        this.$http.get(this.url_prefix + "UploadServlet").then(response => {
-             this.cards = response.data.data;
-        }, response => {
-            console.log("error");
-        });
+        // this.$http.get(this.url_prefix + "UploadServlet").then(response => {
+        //      this.cards = response.data.data;
+        // }, response => {
+        //     console.log("error");
+        // });
   },
   methods: {
         // 修改图片地址指向  
