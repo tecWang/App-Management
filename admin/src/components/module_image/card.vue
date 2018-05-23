@@ -5,7 +5,7 @@
             <h5 class="card-title" style="margin-bottom: 0;">{{cardData.image_Name}}</h5>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item" onselectstart="return false;" @click="toggleModal(this)">{{cardData.image_Target_Link}}</li>
+            <li class="list-group-item" onselectstart="return false;" @click="toggleModal()">{{cardData.image_Target_Link}}</li>
             <li class="list-group-item" onselectstart="return false;" @click="toggleStatus()" v-show="cardData.image_Is_Used == 1">已启用<span class="oi oi-check float-right tec-icon-right" title="icon name" aria-hidden="true"></span></li>
             <li class="list-group-item" onselectstart="return false;" @click="toggleStatus()" v-show="cardData.image_Is_Used != 1">未启用<span class="oi oi-x float-right tec-icon-false" title="icon name" aria-hidden="true"></span></li>
         </ul>
@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         // 开启mask遮罩
-        toggleModal(dom){
+        toggleModal(){
             $('#exampleModal').modal('toggle');
             let id = this.$data.cardData.image_ID;
             sessionStorage.setItem("image_id", id);

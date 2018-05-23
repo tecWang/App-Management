@@ -74,11 +74,11 @@ export default {
   },
   mounted: function(){
         // 渲染图片模块首页的cards
-        // this.$http.get(this.url_prefix + "UploadServlet").then(response => {
-        //      this.cards = response.data.data;
-        // }, response => {
-        //     console.log("error");
-        // });
+        this.$http.get(this.url_prefix + "UploadServlet").then(response => {
+             this.cards = response.data.data;
+        }, response => {
+            console.log("error");
+        });
   },
   methods: {
         // 修改图片地址指向  
