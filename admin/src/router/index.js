@@ -5,6 +5,7 @@ import Tab_image from '@/components/module_image/Tab_image'       // 图片模�
 import Tab_contract from '@/components/module_contract/Tab_contract'    // 合同模块路由
 import Tab_problem from '@/components/module_problem/Tab_problem'    // 合同模块路由
 import Login from '@/components/module_login/login'
+import Sign from '@/components/module_login/sign'
 
 Vue.use(Router); 
 
@@ -14,17 +15,23 @@ const vueRouter = new Router({
 		{path: '/contracts',name: 'Tab_contract',component: Tab_contract},
 		{path: '/problems',name: 'Tab_problem',component: Tab_problem},
 		{path: '/login', name: 'Login', component: Login},
+		{path: '/sign', name: 'Sign', component: Sign},
 	]
 });  
 
 vueRouter.beforeEach(function (to, from, next) {
 	const auth = store.state.auth;
-	console.log(auth);
-	console.log(to.path);
-	if (auth.IsLogin) {
-		next();
+	if(!auth.IsLogin){
+		if (to.path == '/login') {
+			next();
+		} else if (to.path != '/login') {
+			next('/login');
+		}
 	}else {
-		next({path: '/problems'});
+		if (to.path == '/login'){
+			next('/images');
+		}
+		next();
 	}
 }); 
 

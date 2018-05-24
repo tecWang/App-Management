@@ -19,11 +19,11 @@ export default {
     name: 'Card',
     props: {
         data: Object,
-        url_prefix: config.url_prefix
     },
     data(){
         return {
-            cardData: this.data
+            cardData: this.data,
+            url_prefix: config.url_prefix
         }
     },
     methods: {
