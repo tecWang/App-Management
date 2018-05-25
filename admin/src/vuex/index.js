@@ -7,8 +7,11 @@ const store = new Vuex.Store({
     // 全局变量
     state: {
         auth: {
-            IsLogin: false,
-            user: ""
+            IsLogin: true,
+            user: "王佳文"
+        },
+        url: {
+            url_prefix: "http://192.168.1.113:8080/yong/"
         }
     },
     // 修改全局变量必须通过mutations中的方法

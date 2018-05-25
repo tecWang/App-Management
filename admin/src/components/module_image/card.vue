@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import config from '../../assets/config.js';
 
 export default {
     name: 'Card',
@@ -23,7 +22,6 @@ export default {
     data(){
         return {
             cardData: this.data,
-            url_prefix: config.url_prefix
         }
     },
     methods: {
@@ -41,7 +39,7 @@ export default {
                 this.cardData.image_Is_Used = 1;
             }
 
-            this.$http.post(this.url_prefix + "ImageServlet", {
+            this.$http.post(this.$store.state.url.url_prefix + "ImageServlet", {
                 status: this.cardData.image_Is_Used,
                 id: this.cardData.image_ID
             },{emulateJSON: true}

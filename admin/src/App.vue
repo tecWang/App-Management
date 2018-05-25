@@ -10,13 +10,13 @@
 					<a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#/images">图片管理</a>
+					<a class="nav-link" href="#/images/preview">图片管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#/contracts">合同管理</a>
+					<a class="nav-link" href="#/contracts/preview">合同管理</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#/problems">问题数据库</a>
+					<a class="nav-link" href="#/problems/preview">问题数据库</a>
 				</li>
 			</ul>
 			<!-- 登录注册 -->
@@ -40,9 +40,8 @@
 </template>
 
 <script>
-import Split from "./components/module_image/split.vue"
+import Split from "./components/split.vue"
 import store from "./vuex/index.js"
-
 
 export default {
   name: 'App',

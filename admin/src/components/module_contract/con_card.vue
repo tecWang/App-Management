@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import config from "../../assets/config.js";
 
 export default {
     name: 'Con_card',
@@ -32,7 +31,6 @@ export default {
         return {
             cardData: this.conData,     // 卡片数据绑定
             isTimeClose: true,          // 是否临近两个月
-            url_prefix: ""              // 后台数据请求前缀
         }   
     },
     created(){
@@ -47,7 +45,6 @@ export default {
             });
         },
         compareTime(){
-            this.url_prefix = config.url_prefix;
             let time1 = new Date(this.cardData.contract_EndDate);
             let time2 = new Date();
             let dateSpan = time1 - time2;

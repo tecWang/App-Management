@@ -23,20 +23,17 @@
 </template>
 
 <script>
-import config from "../../assets/config.js"
-
 export default {
     name: 'login',
     data(){
         return {
             username: "",
             password: "",
-            url_prefix: config.url_prefix
         }
     },
     methods: {
         sendData(){
-            this.$http.post(this.url_prefix + 'LoginServlet', {
+            this.$http.post(this.$store.state.url.url_prefix + 'LoginServlet', {
                 userName: this.username,
                 userPass: this.password
             }, {emulateJSON: true}).then(response => {
