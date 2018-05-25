@@ -4,7 +4,7 @@
         <span class="col-md-4 col-12 border-right" style="text-align: center;">{{item.problem_Name}}</span>
         <span class="col-md-3 border-right" style="text-align: center;">{{item.problem_Last_Modify}}</span>
         <span class="col-md-3 border-right" style="text-align: center;">{{item.problem_Owner}}</span>
-        <span @click="callPreviewTool" class="col-sm-1 tec-problem-preview" :data-path="item.problem_Last_Modify">预览</span>
+        <span @click="callPreviewTool" style="text-align: center;" class="col-sm-1 tec-problem-preview" :data-path="item.problem_Last_Modify">预览</span>
     </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
     },
     methods: {
         callPreviewTool(){
-            alert("I am tool");
+            $('#exampleModal').modal('toggle');
+            this.$emit('toggleModal');
         }
     }
 }

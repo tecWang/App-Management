@@ -17,6 +17,7 @@ import Tab_problem from '@/components/module_problem/Tab_problem'    // 合同�
 import Problem_preview from '@/components/module_problem/preview'
 import Problem_add from '@/components/module_problem/add'
 
+import PDF from '@/components/module_pdf/pdf.vue'
 
 import Login from '@/components/module_login/login'
 import Sign from '@/components/module_login/sign'
@@ -42,10 +43,11 @@ const vueRouter = new Router({
 				{ path: '/problems/preview', component: Problem_preview},
 				{ path: '/problems/add', component: Problem_add}
 		]},{
-			path: '/login', name: 'Login', component: Login},
-		{
+			path: '/login', name: 'Login', component: Login
+		},{
 			path: '/sign', name: 'Sign', component: Sign
-		},
+		},{
+			path: '/pdf', name: 'PDF', component: PDF}
 	]
 });  
 

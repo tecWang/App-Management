@@ -2,9 +2,7 @@
     <div>
         <!-- card容器，用来插入大量数据 -->
         <div class="card-columns" id="cardContainer" >
-            <div v-for="card in cards" :key="card.id">
-                <tec-card :data="card"></tec-card>
-            </div>
+            <tec-card :data="card" v-for="card in cards" :key="card.id"></tec-card>
         </div>
         <!-- 模态框 -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

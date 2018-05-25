@@ -1,12 +1,33 @@
 <template>
     <div class="container-fluid">
-        <item-problem v-if="errorMessage == ''" v-for="item in lists" :itemData="item" :key="item.problem_ID"></item-problem>
-        <div v-else>{{errorMessage}}</div>
+        <div class="row border-top border-left border-right tec-item-problem">
+            <span class="col-md-1 border-right" style="text-align: center;">问题ID</span>
+            <span class="col-md-4 col-12 border-right" style="text-align: center;">问题标题</span>
+            <span class="col-md-3 border-right" style="text-align: center;">最后修改时间</span>
+            <span class="col-md-3 border-right" style="text-align: center;">问题最初发起人</span>
+            <span class="col-md-1 tec-problem-preview" style="text-align: center;">功能</span>
+        </div>
+        <div v-if="errorMessage != ''" class="row tec-item-problem border-left border-right border-top" >
+            <span class="col-md-12" style="text-align: center">{{errorMessage}}</span>
+        </div>
+        <item-problem v-else v-for="item in lists" :itemData="item" :key="item.problem_ID" @toggleModal="showModal"></item-problem>
+        
+        <!-- 模态框 -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <item-pdf src="../../../static/pdf.pdf"></item-pdf>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </div>
 </template>
 
 <script>
 import item_problem from "./item.vue"
+import pdf from 'vue-pdf'
 
 export default {
     name: 'Problem_preview',
@@ -26,10 +47,14 @@ export default {
             }, response=>{
                 this.errorMessage = "error";
             });
+        },
+        showModal(){
+            
         }
     },  
     components: {
-        "item-problem": item_problem
+        "item-problem": item_problem,
+        "item-pdf": pdf
     }
 }
 </script>

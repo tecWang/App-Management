@@ -11,10 +11,9 @@
 </template>
 
 
-<script>
-
-
+<script>    
 export default {
     name: 'Tab_problem',
+    
 }
 </script>
