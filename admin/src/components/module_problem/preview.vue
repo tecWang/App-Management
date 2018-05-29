@@ -17,8 +17,15 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <item-pdf src="../../../static/pdf.pdf"></item-pdf>
+                        {{currentPage}} / {{pageCount}}
+                        <button @click="rotate += 90">&#x27F3;</button>
+                        <button @click="rotate -= 90">&#x27F2;</button>
+                        <item-pdf src="https://cdn.mozilla.net/pdfjs/tracemonkey.pdf"
+                                rotate = "rotate"
+                                @num-pages="pageCount = $event"
+                                @page-loaded="currentPage = $event"></item-pdf>
                     </div>
+                    
                 </div>
             </div>
         </div> 
@@ -34,7 +41,10 @@ export default {
     data(){
         return {
             lists: [],
-            errorMessage: ""
+            errorMessage: "",   
+            pageCount: 0,
+            currentPage: 0,
+            rotate: ""
         }
     },
     mounted(){
@@ -61,6 +71,9 @@ export default {
 
 <style>
 .tec-item-problem:last-of-type {
+    border-bottom: 1px solid #dee2e6!important;
+}
+.tec-item-problem:nth-last-of-type(2){
     border-bottom: 1px solid #dee2e6!important;
 }
 .tec-item-problem {
