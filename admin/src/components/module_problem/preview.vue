@@ -17,15 +17,8 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        {{currentPage}} / {{pageCount}}
-                        <button @click="rotate += 90">&#x27F3;</button>
-                        <button @click="rotate -= 90">&#x27F2;</button>
-                        <item-pdf src="https://cdn.mozilla.net/pdfjs/tracemonkey.pdf"
-                                rotate = "rotate"
-                                @num-pages="pageCount = $event"
-                                @page-loaded="currentPage = $event"></item-pdf>
+                        <item-pdf></item-pdf>
                     </div>
-                    
                 </div>
             </div>
         </div> 
@@ -34,7 +27,7 @@
 
 <script>
 import item_problem from "./item.vue"
-import pdf from 'vue-pdf'
+import tecPdf from "../module_plugins/pdf.vue"
 
 export default {
     name: 'Problem_preview',
@@ -42,9 +35,6 @@ export default {
         return {
             lists: [],
             errorMessage: "",   
-            pageCount: 0,
-            currentPage: 0,
-            rotate: ""
         }
     },
     mounted(){
@@ -60,11 +50,11 @@ export default {
         },
         showModal(){
             
-        }
+        },
     },  
     components: {
         "item-problem": item_problem,
-        "item-pdf": pdf
+        "item-pdf": tecPdf
     }
 }
 </script>

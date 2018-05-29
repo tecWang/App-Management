@@ -1,15 +1,14 @@
 <template>
-    <div>
-        <form  :action="this.$store.state.url.url_prefix + 'UploadServlet'"  
-                method="post" enctype="multipart/form-data">  
-                <input type="submit" name="name"> <input type="file" name="file1">  
-        </form>
-    </div>
+    <tec-upload :range="'image'"></tec-upload>
 </template>
 
 <script>
+import upload from "../module_plugins/upload.vue"
 export default {
-    name: 'Image_Add'
+    name: 'Image_Add',
+    components: {
+        "tec-upload": upload
+    }
 }
 </script>
 

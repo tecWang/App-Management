@@ -2,7 +2,7 @@
     <div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">合同号</span>
+                <span class="input-group-text" id="inputGroup-sizing-default">合同编号</span>
             </div>
             <input type="text" class="form-control" name="c_id" v-model="c_id">
         </div>
@@ -14,13 +14,13 @@
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">合同开始时间</span>
+                <span class="input-group-text" id="inputGroup-sizing-default">开始时间</span>
             </div>
             <input type="text" class="form-control" name="c_bdate" v-model="c_bdate">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">合同结束时间</span>
+                <span class="input-group-text" id="inputGroup-sizing-default">到期时间</span>
             </div>
             <input type="text" class="form-control" name="c_edate" v-model="c_edate">
         </div>
@@ -42,7 +42,9 @@
             </div>
             <input type="text" class="form-control" name="c_val" v-model="c_val">
         </div>
-        <button @click="insertContract">插入</button>
+        <div style="text-align: center; line-height: 2rem;">
+            <button class="btn" @click="insertContract">插入</button>
+        </div>
     </div>
 </template>
 
