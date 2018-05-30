@@ -5,7 +5,7 @@
             <button class="btn" @click="rotate -= 90">&#x27F2;</button>
             <button class="btn" @click="$refs.pdf.print()">打印</button>
         </p>
-        <pdf    src="https://cdn.mozilla.net/pdfjs/tracemonkey.pdf"
+        <pdf    :src="fileSrc"
                 ref="pdf"
                 :rotate = "rotate"
                 :page = "currentPage"
@@ -23,12 +23,21 @@
 import pdf from 'vue-pdf'
 export default {
     name: 'tecPdf', // 名字不能和导入的模块名称一样，否则会递归溢出
+    props: {
+        pdfSrc: String
+    },
     data(){
         return {
             pageCount: 0,
             currentPage: 1,
-            rotate: 0
+            rotate: 0,
+            fileSrc: this.$store.state.url.url_prefix + this.pdfSrc
+            // fileSrc: this.$store.state.url.url_prefix + this.pdfSrc
         }
+    },
+    ready(){
+        this.fileSrc = this.$store.state.url.url_prefix + this.pdfSrc;
+        console.log(fileSrc);
     },
     methods: {
         nextPage(){

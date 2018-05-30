@@ -3,7 +3,8 @@
         <span class="col-md-1 border-right" style="text-align: center;">
             {{item.problem_ID | replaceBlankValue}}
         </span>
-        <span class="col-md-4 col-12 border-right" style="text-align: center;">
+        <span onselectstart="return false;" class="col-md-4 col-12 border-right tec-item-preview" style="text-align: center;"
+             @click="callProblemDetail" >
             {{item.problem_Name | replaceBlankValue}}
         </span>
         <span class="col-md-3 border-right" style="text-align: center;">
@@ -12,7 +13,8 @@
         <span class="col-md-3 border-right" style="text-align: center;">
             {{item.problem_Owner | replaceBlankValue}}
             </span>
-        <span id="file_path" @click="callPreviewTool" style="text-align: center;" class="col-sm-1 tec-problem-preview" :data-path="item.problem_Content">预览</span>
+        <span :id="item.problem_Content" class="col-sm-1 tec-item-preview" style="text-align: center;"
+            @click="callPreviewTool($event)" onselectstart="return false;">预览</span>
     </div>
 </template>
 
@@ -37,24 +39,15 @@ export default {
         }
     },
     methods: {
-        callPreviewTool(){
-            $('#exampleModal').modal('toggle');
-            this.$emit('toggleModal');
-            // window.location.href = '#/problems/pdf';     //在同当前窗口中打开窗口
-            // sessionStorage.setItem("path": path);
-            // let path = $('#file_path').data('path');
-            // window.open = '#/problems/pdf';     //在同当前窗口中打开窗口
+        callPreviewTool(e){
+            let filepath = e.target.id;
+            this.$emit('toggleModal', {
+                file_path: filepath
+            });
+        },
+        callProblemDetail(){
+            this.$router.push("/problems/detail");
         }
     }
 }
 </script>
-
-
-<style>
-.tec-problem-preview{
-    cursor: pointer;
-}
-.tec-problem-preview:hover {
-    color: red;
-}
-</style>

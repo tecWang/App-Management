@@ -1,0 +1,21 @@
+/* 鼠标hover效果 */
+.tec-item-preview{
+    cursor: pointer;
+}
+.tec-item-preview:hover {
+    color: red;
+}
+
+/* 字符严重程度 */
+.tec-warn {
+    color: orange;
+}
+.tec-danger {
+    color: orangered;
+}
+.tec-deep-danger {
+    color: red;
+}
+.tec-invalid {
+    color: gray;
+}

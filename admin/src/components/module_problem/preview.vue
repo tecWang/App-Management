@@ -5,19 +5,22 @@
             <span class="col-md-4 col-12 border-right" style="text-align: center;">问题标题</span>
             <span class="col-md-3 border-right" style="text-align: center;">最后修改时间</span>
             <span class="col-md-3 border-right" style="text-align: center;">问题发起人</span>
-            <span class="col-md-1 tec-problem-preview" style="text-align: center;">功能</span>
+            <span class="col-md-1" style="text-align: center;">功能</span>
         </div>
+
         <div v-if="errorMessage != ''" class="row tec-item-problem border-left border-right border-top" >
             <span class="col-md-12" style="text-align: center">{{errorMessage}}</span>
         </div>
-        <item-problem v-else v-for="item in lists" :itemData="item" :key="item.problem_ID" @toggleModal="showModal"></item-problem>
+        <item-problem v-else v-for="item in lists" :itemData="item" :key="item.problem_ID" :data-path="item.problem_Content" 
+            @toggleModal="showModal"></item-problem>
         
         <!-- 模态框 -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <item-pdf></item-pdf>
+                        <div v-if="remoteSrc == ''"></div>
+                        <item-pdf v-else :pdfSrc="remoteSrc"></item-pdf>
                     </div>
                 </div>
             </div>
@@ -34,7 +37,8 @@ export default {
     data(){
         return {
             lists: [],
-            errorMessage: "",   
+            errorMessage: "",
+            remoteSrc: ""
         }
     },
     mounted(){
@@ -48,8 +52,9 @@ export default {
                 this.errorMessage = "error";
             });
         },
-        showModal(){
-            
+        showModal(obj){
+            this.remoteSrc = obj.file_path;
+            $('#exampleModal').modal('toggle');
         },
     },  
     components: {

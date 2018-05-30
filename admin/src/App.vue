@@ -19,6 +19,9 @@
 					<a class="nav-link" href="#/contracts/preview">合同管理</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="#/projects/preview">项目管理</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="#/problems/preview">问题数据库</a>
 				</li>
 			</ul>
