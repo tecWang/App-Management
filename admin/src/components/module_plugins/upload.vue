@@ -46,9 +46,10 @@ export default {
             }); 
         }); 
 
-        function showResponse(responseText, statusText, xhr, $form){      
-            console.log(responseText);    
+        let vueEle = this;
+        function showResponse(responseText, statusText, xhr, $form){  
             alert(responseText.msg);
+            vueEle.$emit("uploadSuccess", responseText);
         }  
     }
 }
