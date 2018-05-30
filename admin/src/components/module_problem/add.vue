@@ -7,16 +7,9 @@
             </div>
             <input type="text" class="form-control" v-model="p_name" placeholder="插件无法正常调用...">
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">记录人</span>
-            </div>
-            <input type="text" class="form-control" v-model="p_person" placeholder="tecwang">
-        </div>
-
         <tec-upload :range="'file'" @uploadSuccess="getReturnedData($event)"></tec-upload>
         
-        <div style="text-align: center;">
+        <div style="text-align: cen ter;">
             <button class="btn" @click="uploadProblem">确定</button>
         </div>
     </div>
@@ -42,14 +35,14 @@ export default {
     },
     methods: {
         getReturnedData(data){
-            console.log(data);
             this.p_id = data.p_id;
         },
         uploadProblem(){
             this.$http.post(this.$store.state.url.url_prefix + "ProblemServlet",{
                 p_id: this.p_id,
                 p_name: this.p_name,
-                p_person: this.p_person
+                p_person: this.$store.state.auth.user,
+                p_personID: this.$store.state.auth.userID
             },{emulateJSON: true}).then(response => {
                 console.log(response.data);
             }, response => {

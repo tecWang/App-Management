@@ -4,7 +4,7 @@
             <span class="col-md-1 border-right" style="text-align: center;">问题ID</span>
             <span class="col-md-4 col-12 border-right" style="text-align: center;">问题标题</span>
             <span class="col-md-3 border-right" style="text-align: center;">最后修改时间</span>
-            <span class="col-md-3 border-right" style="text-align: center;">问题最初发起人</span>
+            <span class="col-md-3 border-right" style="text-align: center;">问题发起人</span>
             <span class="col-md-1 tec-problem-preview" style="text-align: center;">功能</span>
         </div>
         <div v-if="errorMessage != ''" class="row tec-item-problem border-left border-right border-top" >

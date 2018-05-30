@@ -1,9 +1,17 @@
 <template>
     <div data-attr="title" class="row border-top border-left border-right tec-item-problem">
-        <span class="col-md-1 border-right" style="text-align: center;">{{item.problem_ID}}</span>
-        <span class="col-md-4 col-12 border-right" style="text-align: center;">{{item.problem_Name}}</span>
-        <span class="col-md-3 border-right" style="text-align: center;">{{item.problem_Last_Modify}}</span>
-        <span class="col-md-3 border-right" style="text-align: center;">{{item.problem_Owner}}</span>
+        <span class="col-md-1 border-right" style="text-align: center;">
+            {{item.problem_ID | replaceBlankValue}}
+        </span>
+        <span class="col-md-4 col-12 border-right" style="text-align: center;">
+            {{item.problem_Name | replaceBlankValue}}
+        </span>
+        <span class="col-md-3 border-right" style="text-align: center;">
+            {{item.problem_Last_Modify | replaceBlankValue}}
+        </span>
+        <span class="col-md-3 border-right" style="text-align: center;">
+            {{item.problem_Owner | replaceBlankValue}}
+            </span>
         <span id="file_path" @click="callPreviewTool" style="text-align: center;" class="col-sm-1 tec-problem-preview" :data-path="item.problem_Content">预览</span>
     </div>
 </template>
@@ -17,6 +25,15 @@ export default {
     data(){
         return {
             item: this.itemData     // 问题条目数据
+        }
+    },
+    filters: {
+        replaceBlankValue(value){
+            if(value == ""){
+                return "-"
+            }else {
+                return value;
+            }
         }
     },
     methods: {

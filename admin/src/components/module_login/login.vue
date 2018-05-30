@@ -31,6 +31,9 @@ export default {
             password: "",
         }
     },
+    ready(){
+        console.log(this.$store.state);
+    },
     methods: {
         sendData(){
             this.$http.post(this.$store.state.url.url_prefix + 'LoginServlet', {
@@ -38,8 +41,11 @@ export default {
                 userPass: this.password
             }, {emulateJSON: true}).then(response => {
                 if(response.data.status == 1){
-                    this.$store.commit('login', response.data.name);    // 登录， 修改IsLogin为 true
-                    this.$router.push("/images");
+                    this.$store.commit('login', {
+                        userName: response.data.name, 
+                        userID: response.data.userID
+                    });    // 登录， 修改IsLogin为 true
+                    this.$router.push("/images/preview");
                     console.log(this.$store.state);
                 }
             }, response => {
