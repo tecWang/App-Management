@@ -1,8 +1,8 @@
 /* 鼠标hover效果 */
-.tec-item-preview{
+.tec-item-active{
     cursor: pointer;
 }
-.tec-item-preview:hover {
+.tec-item-active:hover {
     color: red;
 }
 

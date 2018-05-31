@@ -2,7 +2,7 @@
     <div class="card">
         <div onselectstart="return false;" class="card-header">
             <!-- 项目名称 -->
-            <span :id="item.project_ID" class="tec-item-preview" 
+            <span :id="item.project_ID" class="tec-item-active" 
             @click="callProjectDetail($event)">项目名称：{{item.project_Name}}</span>
             
             <!-- 根据逾期严重程度决定显示哪个标签 -->

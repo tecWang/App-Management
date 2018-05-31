@@ -3,7 +3,7 @@
         <span class="col-md-1 border-right" style="text-align: center;">
             {{item.problem_ID | replaceBlankValue}}
         </span>
-        <span onselectstart="return false;" class="col-md-4 col-12 border-right tec-item-preview" style="text-align: center;"
+        <span onselectstart="return false;" class="col-md-4 col-12 border-right tec-item-active" style="text-align: center;"
              @click="callProblemDetail" >
             {{item.problem_Name | replaceBlankValue}}
         </span>
@@ -13,7 +13,7 @@
         <span class="col-md-3 border-right" style="text-align: center;">
             {{item.problem_Owner | replaceBlankValue}}
             </span>
-        <span :id="item.problem_Content" class="col-sm-1 tec-item-preview" style="text-align: center;"
+        <span :id="item.problem_Content" class="col-sm-1 tec-item-active" style="text-align: center;"
             @click="callPreviewTool($event)" onselectstart="return false;">预览</span>
     </div>
 </template>
