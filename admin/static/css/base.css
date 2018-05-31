@@ -19,3 +19,8 @@
 .tec-invalid {
     color: gray;
 }
+
+/* 去除列表边框 */
+.tec-no-border {
+    border: none;
+}

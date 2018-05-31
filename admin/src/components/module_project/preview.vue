@@ -1,8 +1,6 @@
 <template>
     <div class="accordion" >
-        <div v-for="card in cards" :key="card.project_ID">
-            <tec-pro-card :cardData="card"></tec-pro-card>
-        </div>
+        <tec-pro-card :cardData="card" v-for="card in cards" :key="card.project_ID"></tec-pro-card>
     </div>
 </template>
 
@@ -21,7 +19,6 @@ export default {
     },
     mounted(){
         this.$http.get(this.$store.state.url.url_prefix + 'ProjectServlet').then(response => {
-            console.log(response.data);
             this.cards = response.data.data;
         }, response => {
             console.log("error");

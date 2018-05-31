@@ -47,9 +47,9 @@ const vueRouter = new Router({
 		{
 			path: '/projects', name: 'Tab_Project', component: Tab_Project,
 			children: [
-				{ path: '/projects/preview', component: Project_Preview },
-				{ path: '/projects/add', component: Project_Add },
-				{ path: '/projects/detail', component: Project_detail }]
+				{ path: '/projects/preview', name: 'Project_Preview', component: Project_Preview },
+				{ path: '/projects/add', name: 'Project_Add',component: Project_Add },
+				{ path: '/projects/detail', name: 'Project_detail', component: Project_detail }]
 		},
 		{
 			path: '/problems',name: 'Tab_problem',component: Tab_problem,

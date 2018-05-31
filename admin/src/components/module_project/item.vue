@@ -1,13 +1,16 @@
 <template>
-    <div>
-        <div class="card">
-            <div onselectstart="return false;" class="card-header">
-                <span class="tec-item-preview" @click="callProjectDetail">项目名称：{{item.project_Name}}</span>
-                <span v-if="item.project_Expired == 1" class="float-right tec-warn">{{item.project_Expired | replaceText}}</span>
-                <span v-else-if="item.project_Expired == 2" class="float-right tec-danger">{{item.project_Expired | replaceText}}</span>
-                <span v-else-if="item.project_Expired == 3" class="float-right tec-deep-danger">{{item.project_Expired | replaceText}}</span>
-                <span v-else class="float-right tec-invalid">{{item.project_Expired | replaceText}}</span>
-            </div>
+    <div class="card">
+        <div onselectstart="return false;" class="card-header">
+            <!-- 项目名称 -->
+            <span :id="item.project_ID" class="tec-item-preview" 
+            @click="callProjectDetail($event)">项目名称：{{item.project_Name}}</span>
+            
+            <!-- 根据逾期严重程度决定显示哪个标签 -->
+            <span v-if="item.project_Expired == 0" class="float-right">{{item.project_Expired | replaceText}}</span>
+            <span v-else-if="item.project_Expired == 1" class="float-right tec-warn">{{item.project_Expired | replaceText}}</span>
+            <span v-else-if="item.project_Expired == 2" class="float-right tec-danger">{{item.project_Expired | replaceText}}</span>
+            <span v-else-if="item.project_Expired == 3" class="float-right tec-deep-danger">{{item.project_Expired | replaceText}}</span>
+            <span v-else class="float-right tec-invalid">{{item.project_Expired | replaceText}}</span>
         </div>
     </div>
 </template>
@@ -25,7 +28,10 @@ export default {
     },
     filters: {
         replaceText(data){
-            if(data == 1){
+            if(data == 0){
+                return "项目进展正常";
+            }
+            else if(data == 1){
                 return "轻度逾期";
             }else if(data == 2){
                 return "重度逾期";
@@ -37,8 +43,13 @@ export default {
         }
     },
     methods: {
-        callProjectDetail(){
-            this.$router.push("/projects/detail");
+        callProjectDetail(e){
+            this.$router.push({
+                name: 'Project_detail',
+                params: { 
+                    p_id: e.target.id
+                }                
+            });
         }
     }
 }
