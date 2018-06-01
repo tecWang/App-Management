@@ -8,8 +8,9 @@ import router from './router'
 
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
-
-
+Vue.http.options.headers = {
+  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+}
 // Vue.config.productionTip = false
 
 /* eslint-disable no-new */

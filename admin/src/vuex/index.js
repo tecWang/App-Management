@@ -13,7 +13,7 @@ const store = new Vuex.Store({
         },
         url: {
             // url_prefix: "http://192.168.1.113:8080/yong/"    // 生产环境地址
-            url_prefix: "http://192.168.1.113:8860/yong/"       // 开发环境地址
+            url_prefix: "http://192.168.1.113:8080/admin/"       // 开发环境地址
         }
     },
     // 修改全局变量必须通过mutations中的方法

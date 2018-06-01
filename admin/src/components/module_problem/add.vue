@@ -10,7 +10,7 @@
         <tec-upload :range="'file'" @uploadSuccess="getReturnedData($event)"></tec-upload>
         
         <div style="text-align: cen ter;">
-            <button class="btn" @click="uploadProblem">确定</button>
+            <button class="btn btn-primary" @click="uploadProblem">确定</button>
         </div>
     </div>
 </template>

@@ -75,7 +75,7 @@ export default {
                 c_b: this.c_b,
                 c_val: this.c_val
             }, {emulateJSON: true}).then(response => {
-                if(response.data.status == 1){
+                if(response.data.status == 1){  // 录入成功后清空文本框
                     this.c_id = "";
                     this.c_name = "";
                     this.c_bdate = "";

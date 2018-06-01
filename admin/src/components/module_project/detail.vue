@@ -80,11 +80,11 @@
                         <form>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">发起人:</label>
-                                <input type="text" class="form-control" placeholder="张惠茹" v-model="upload.content">
+                                <input type="text" class="form-control" placeholder="张惠茹" v-model="upload.contributor">
                                 
                                 <div v-if="upload.addType == 'addDevelop'">
                                     <label for="recipient-name" class="col-form-label">进度内容:</label>
-                                    <input type="text" class="form-control" placeholder="部署OA" v-model="upload.contributor">
+                                    <input type="text" class="form-control" placeholder="部署OA" v-model="upload.content">
                                 </div>
                                 
                                 <div v-else-if="upload.addType == 'addAlert'">
@@ -117,6 +117,7 @@ export default {
     data(){
         return {
             item: {},
+            p_id: "",
             // 任务进度图及相关变量
             task: {
                 scheduleArr: [],
@@ -137,6 +138,16 @@ export default {
             }
         }
     },
+    beforeMount(){
+        this.p_id = this.$route.params.p_id;
+        this.requestDetailInfo();
+        setTimeout(() => {
+            this.initCharts();
+        }, 500);
+    },
+    mounted(){
+        
+    },
     methods: {
         callModel(e){
             this.upload.addType = e.target.id;
@@ -144,29 +155,52 @@ export default {
         },
         sendCardMsg(){
             this.$http.post(this.$store.state.url.url_prefix + 'ProjectServlet', {
-                
-            }).then(response => {
+                // p_id: 1,
+                p_id: this.p_id,
+                requestType: 'add',
+                addType: this.upload.addType,
+                contributor: this.upload.contributor,
+                content: this.upload.content,
+                receiver: this.upload.receiver
+            }, {emulateJSON: true}).then(response => {
                 console.log(response.data);
+                this.requestDetailInfo();
+                $('#stateBtn').addClass('visible');
+                $('#stateBtn').removeClass('invisible');
+                setTimeout(() => {
+                    $('#exampleModal').modal('toggle');
+                }, 500);
             }, response => {
+                $('#stateBtn').addClass('visible');
+                $('#stateBtn').removeClass('invisible');
+                $('#stateBtn').addClass('alert-danger');
+                $('#stateBtn').removeClass('alert-success');
+                $('#stateBtn').html("修改失败！");
                 console.log("error");
             });
-        }
-    },
-    beforeMount(){
-        this.$http.post(this.$store.state.url.url_prefix + "ProjectServlet", {
-            requestType: 'detail',
-            p_id: 1
-            // p_id: this.$route.params.p_id
-        }, {emulateJSON: true}).then(response => {
-            console.log(response.data);
-            this.item = response.data.data;
+        },
+        requestDetailInfo(){
+            this.$http.post(this.$store.state.url.url_prefix + "ProjectServlet",{
+                requestType: 'detail',
+                // p_id: '1',
+                p_id: this.p_id
+            }, {emulateJSON: true}).then(response => {
+                // console.log(response.data);
+                this.item = response.data.data;
 
-            // 任务进度图数据绑定
-            this.task.scheduleArr = response.data.schedule;
-            this.task.scheduleLen = this.task.scheduleArr.length;
-            this.task.developArr = response.data.develop;
-            this.task.alertArr = response.data.alert;
+                // 任务进度图数据绑定
+                this.task.scheduleArr = response.data.schedule;
+                this.task.scheduleLen = this.task.scheduleArr.length;
 
+                // 下方两个进度列表的数据绑定
+                this.task.developArr = response.data.develop;
+                this.task.alertArr = response.data.alert;
+
+            },response => {
+                console.log("error")
+            });
+        },
+        initCharts(){
             // 图表数据绑定
             for(let i = this.task.scheduleLen; i > 0; i--){
                 this.task.periodArr.push("第" + i + "阶段");
@@ -244,11 +278,8 @@ export default {
             if (options && typeof options === "object") {
                 myChart.setOption(options, true);
             }
-        },response => {
-            console.log("error")
-        });
-    },
-    
+        }
+    }
 }
 </script>
 
