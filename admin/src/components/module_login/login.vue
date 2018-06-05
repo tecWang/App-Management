@@ -2,14 +2,14 @@
     <form >
         <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="inputEmail4">账号</label>
-                <input type="text" class="form-control" id="inputEmail4" v-model="username">
+                <label for="user">账号</label>
+                <input type="text" class="form-control" id="user" v-model="username">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="inputEmail4">密码</label>
-                <input type="password" class="form-control" id="inputEmail4" v-model="password">
+                <label for="pass">密码</label>
+                <input type="password" class="form-control" id="pass" v-model="password">
             </div>
         </div>
 

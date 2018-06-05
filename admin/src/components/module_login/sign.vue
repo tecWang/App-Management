@@ -4,7 +4,10 @@
         <div class="form-row">
             <div class="form-group col-md-12">
                 <label for="inputEmail4">账号</label>
-                <input type="text" class="form-control" id="inputEmail4" v-model="upload.userAccount">
+                <input type="text" class="form-control" id="inputEmail4" 
+                    v-model="upload.userAccount"
+                    @blur="isUserNameRepeat">
+                <span style="color: red;">{{NameRepeatValue}}</span>
             </div>
         </div>
         <div class="form-row">
@@ -26,7 +29,8 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputName2">用户简码</label>
-                <input type="text" class="form-control" id="inputName2" v-model="upload.user_simpleName">
+                <input @blur="isSimpleNameRepeat" type="text" class="form-control" id="inputName2" v-model="upload.user_simpleName">
+                <span style="color: red;">{{simpleNameRepeatValue}}</span>
             </div>
         </div>
 
@@ -50,6 +54,8 @@ export default {
     name: 'sign',
     data(){
         return {
+            NameRepeatValue: "",
+            simpleNameRepeatValue: "",
             upload: {
                 userAccount: "",
                 userPass: "",
@@ -70,12 +76,20 @@ export default {
             }else {
                 errorText = ''
             }
-
             return errorText
-        },
+        }
     },
     methods: {
         addUser(){
+            // 检测是否所有项为空
+            if( this.upload.userAccount == "" ||
+                this.upload.userPass == "" ||
+                this.upload.userPassAgain == "" ||
+                this.upload.userName == "" ||
+                this.upload.user_simpleName == ""){
+                alert("所有列表项都需要填满");
+                return ;
+            }
             this.$http.post(this.$store.state.url.url_prefix + "SignServlet", {
                 userAccount: this.upload.userAccount,
                 userPass: this.upload.userPass,
@@ -85,6 +99,34 @@ export default {
                 user_organizeID: 1987443
             }, {emulateJSON: true}).then(res => {
                 alert(res.data.msg);
+            }, res => {
+                console.log("error");
+            });
+        },
+        isUserNameRepeat(){
+            this.$http.post(this.$store.state.url.url_prefix + "RepeatServlet", {
+                repeatName: "account",
+                account: this.upload.userAccount
+            }, {emulateJSON: true}).then(res => {
+                if(res.data.status == 0){
+                    this.NameRepeatValue = '重复'
+                }else {
+                    this.NameRepeatValue = ''
+                }
+            }, res => {
+                console.log("error");
+            });
+        },
+        isSimpleNameRepeat(){
+            this.$http.post(this.$store.state.url.url_prefix + "RepeatServlet", {
+                repeatName: "simpleName",
+                simpleName: this.upload.user_simpleName
+            }, {emulateJSON: true}).then(res => {
+                if(res.data.status == 0){
+                    this.simpleNameRepeatValue = '重复'
+                }else {
+                    this.simpleNameRepeatValue = ''
+                }
             }, res => {
                 console.log("error");
             });
