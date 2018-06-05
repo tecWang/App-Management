@@ -1,10 +1,94 @@
 <template>
-    <div>sign</div>
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">账号</label>
+                <input type="text" class="form-control" id="inputEmail4" v-model="upload.userAccount">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputPass1">密码</label>
+                <input type="password" class="form-control" id="inputPass1" v-model.lazy="upload.userPass">
+                
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPass2">密码确认</label>
+                <input type="password" class="form-control" id="inputPass2" v-model.lazy="upload.userPassAgain">
+                <span style="color: red;">{{passwordCheckValidate}}</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputName1">中文名</label>
+                <input type="text" class="form-control" id="inputName1" v-model="upload.userName">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputName2">用户简码</label>
+                <input type="text" class="form-control" id="inputName2" v-model="upload.user_simpleName">
+            </div>
+        </div>
+
+
+        <div style="text-align: center;">
+            <div class="btn btn-primary" @click="addUser">确定</div>
+        </div>
+
+
+        <!-- 没有作用，只是为了占位 -->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <input type="text" hidden >
+            </div>
+        </div>
+    </form>
 </template>
 
 <script>
 export default {
-    name: 'sign'
+    name: 'sign',
+    data(){
+        return {
+            upload: {
+                userAccount: "",
+                userPass: "",
+                userName: "",
+                userPassAgain: "",
+                user_simpleName: "",
+            },
+            password: {
+                passwordFlag: false
+            }
+        }
+    },
+    computed: {
+        passwordCheckValidate: function() {
+            var errorText;
+            if(this.upload.userPassAgain != this.upload.userPass){
+                errorText = '两次密码不匹配'
+            }else {
+                errorText = ''
+            }
+
+            return errorText
+        },
+    },
+    methods: {
+        addUser(){
+            this.$http.post(this.$store.state.url.url_prefix + "SignServlet", {
+                userAccount: this.upload.userAccount,
+                userPass: this.upload.userPass,
+                userName: this.upload.userName,
+                user_simpleName: this.upload.user_simpleName,
+                user_sex: 0,
+                user_organizeID: 1987443
+            }, {emulateJSON: true}).then(res => {
+                console.log(res.data);
+            }, res => {
+                console.log("error");
+            });
+        }
+    }
 }
 </script>
 

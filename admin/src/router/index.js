@@ -12,6 +12,11 @@ import Tab_contract from '@/components/module_contract/Tab_contract'
 import Contract_Preview from '@/components/module_contract/preview'    
 import Contract_Add from '@/components/module_contract/add'    
 
+// 零碎信息记录模块
+import Tab_tiny from  "@/components/module_tiny/Tab_tiny"
+import Tiny_Preview from "@/components/module_tiny/preview"
+import Tiny_Add from "@/components/module_tiny/add"
+
 // 项目管理模块路由
 import Tab_Project from '@/components/module_project/Tab_project'
 import Project_Preview from '@/components/module_project/preview'
@@ -24,7 +29,7 @@ import Problem_preview from '@/components/module_problem/preview'
 import Problem_add from '@/components/module_problem/add'
 import Problem_detail from '@/components/module_problem/detail'
 
-
+// 注册登录模块
 import Login from '@/components/module_login/login'
 import Sign from '@/components/module_login/sign'
 
@@ -50,6 +55,12 @@ const vueRouter = new Router({
 				{ path: '/projects/preview', name: 'Project_Preview', component: Project_Preview },
 				{ path: '/projects/add', name: 'Project_Add',component: Project_Add },
 				{ path: '/projects/detail', name: 'Project_detail', component: Project_detail }]
+		},{
+			path: '/tinys', name: 'Tab_tiny', component: Tab_tiny,
+			children: [
+				{ path: '/tinys/preview', component: Tiny_Preview},
+				{ path: '/tinys/add', component: Tiny_Add}
+			]
 		},
 		{
 			path: '/problems',name: 'Tab_problem',component: Tab_problem,

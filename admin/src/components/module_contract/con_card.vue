@@ -44,6 +44,7 @@ export default {
                 id: this.cardData.c_ID,
             });
         },
+        // 提前两个月通知合同续费
         compareTime(){
             let time1 = new Date(this.cardData.contract_EndDate);
             let time2 = new Date();

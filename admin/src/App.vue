@@ -22,6 +22,9 @@
 					<a class="nav-link" href="#/projects/preview">项目管理</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="#/tinys/preview">零碎信息记录</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="#/problems/preview">问题数据库</a>
 				</li>
 			</ul>

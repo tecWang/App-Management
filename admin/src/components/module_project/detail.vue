@@ -140,13 +140,13 @@ export default {
     },
     beforeMount(){
         this.p_id = this.$route.params.p_id;
+        if(this.p_id != undefined){
+            sessionStorage.setItem("p_id", this.p_id);
+        }
         this.requestDetailInfo();
         setTimeout(() => {
             this.initCharts();
         }, 500);
-    },
-    mounted(){
-        
     },
     methods: {
         callModel(e){
@@ -180,6 +180,10 @@ export default {
             });
         },
         requestDetailInfo(){
+            // 确定项目id是否存在再开始查询，否则会报错
+            if(this.p_id){}else if(sessionStorage.getItem("p_id")){
+                this.p_id = sessionStorage.getItem("p_id");
+            }else {return error;}
             this.$http.post(this.$store.state.url.url_prefix + "ProjectServlet",{
                 requestType: 'detail',
                 // p_id: '1',
