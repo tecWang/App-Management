@@ -7,7 +7,8 @@ const store = new Vuex.Store({
     // 全局变量
     state: {
         auth: {
-            IsLogin: true,
+            IsLogin: false,
+            showNav: false,
             user: "王佳文",
             userID: "1986628"
         },
@@ -22,11 +23,13 @@ const store = new Vuex.Store({
         login(state, obj) {
             console.log(obj.userName + "   " + obj.userID);
             state.auth.IsLogin = true;
+            state.auth.showNav = true;
             state.auth.user = obj.userName;
             state.auth.userID = obj.userID;
         },
         logout(state) {
             state.auth.IsLogin = false;
+            state.auth.showNav = false;
             state.auth.user = undefined;
             state.auth.userID = undefined;
         }

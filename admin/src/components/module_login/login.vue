@@ -1,25 +1,22 @@
 <template>
-    <div class="tec">
-        <div class="col-sm-6 col-12 mx-auto">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">账号</span>
-                </div>
-                <input v-model="username" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon2">密码</span>
-                </div>
-                <input v-model="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
-            </div>
-
-            <div style="text-align:center;">
-                <button type="button" class="btn" @click="sendData">登录</button>
+    <form >
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">账号</label>
+                <input type="text" class="form-control" id="inputEmail4" v-model="username">
             </div>
         </div>
-    </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">密码</label>
+                <input type="password" class="form-control" id="inputEmail4" v-model="password">
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <div class="btn btn-primary" @click="sendData">登陆</div>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -45,8 +42,10 @@ export default {
                         userName: response.data.name, 
                         userID: response.data.userID
                     });    // 登录， 修改IsLogin为 true
-                    this.$router.push("/images/preview");
+                    this.$router.push("/contracts/preview");
                     console.log(this.$store.state);
+                }else {
+                    alert(response.data.data);
                 }
             }, response => {
                 console.log("Error");

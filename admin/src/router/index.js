@@ -79,14 +79,14 @@ const vueRouter = new Router({
 vueRouter.beforeEach(function (to, from, next) {
 	const auth = store.state.auth;
 	if(!auth.IsLogin){
-		if (to.path == '/login') {
+		if (to.path == '/login' || to.path == '/sign') {
 			next();
-		} else if (to.path != '/login') {
+		} else {
 			next('/login');
 		}
-	}else {
-		if (to.path == '/login'){
-			next('/images');
+	}else if(auth.IsLogin){
+		if (to.path == '/login' || to.path == '/sign'){
+			next('/contracts/preview');
 		}
 		next();
 	}

@@ -1,5 +1,6 @@
 <template>
     <form>
+        <!-- <h2 class="mb-3">访客注册</h2> -->
         <div class="form-row">
             <div class="form-group col-md-12">
                 <label for="inputEmail4">账号</label>
@@ -83,7 +84,7 @@ export default {
                 user_sex: 0,
                 user_organizeID: 1987443
             }, {emulateJSON: true}).then(res => {
-                console.log(res.data);
+                alert(res.data.msg);
             }, res => {
                 console.log("error");
             });

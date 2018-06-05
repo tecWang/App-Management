@@ -24,3 +24,8 @@
 .tec-no-border {
     border: none;
 }
+
+/* 间距控制 */
+.tec-padding-right {
+    padding-right: 2rem;
+}
