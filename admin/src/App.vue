@@ -29,8 +29,11 @@
 					</li>
 				</ul>
 				<!-- 登录注册 -->
-				<span class="navbar-text tec-item-active" 
-							@click="logout">{{$store.state.auth.user}}</span>
+				<span 	class="navbar-text tec-item-active" 
+						@click="logout"
+						data-toggle="tooltip" data-placement="bottom" 
+                    	title="注销"
+						>{{$store.state.auth.user}}</span>
 			</div>
 		</nav>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light" v-else>
@@ -57,13 +60,18 @@ export default {
   name: 'App',
   store,
   methods: {
-	  logout(){
+	  	logout(){
 			alert("logout");
 			this.$store.commit("logout");
 			localStorage.removeItem("user");
 			localStorage.removeItem("userID");
 			this.$router.push("/login");
 		}
+  },
+  mounted(){
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
   },
   components: {
     "tec-split": Split

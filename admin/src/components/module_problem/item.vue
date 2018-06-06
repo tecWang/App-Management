@@ -13,8 +13,8 @@
         <span class="col-md-3 border-right" style="text-align: center;">
             {{item.problem_Owner | replaceBlankValue}}
             </span>
-        <span :id="item.problem_Content" class="col-sm-1 tec-item-active" style="text-align: center;"
-            @click="callPreviewTool($event)" onselectstart="return false;">预览</span>
+        <span class="col-sm-1 tec-item-active" style="text-align: center;"
+            @click="callPreviewTool()" onselectstart="return false;">预览</span>
     </div>
 </template>
 
@@ -39,10 +39,9 @@ export default {
         }
     },
     methods: {
-        callPreviewTool(e){
-            let filepath = e.target.id;
+        callPreviewTool(){
             this.$emit('toggleModal', {
-                file_path: filepath
+                id: this.itemData.problem_ID
             });
         },
         callProblemDetail(){

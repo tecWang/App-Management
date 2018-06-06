@@ -32,12 +32,10 @@ export default {
             currentPage: 1,
             rotate: 0,
             fileSrc: this.$store.state.url.url_prefix + this.pdfSrc
-            // fileSrc: this.$store.state.url.url_prefix + this.pdfSrc
         }
     },
-    ready(){
+    mounted(){
         this.fileSrc = this.$store.state.url.url_prefix + this.pdfSrc;
-        console.log(fileSrc);
     },
     methods: {
         nextPage(){
