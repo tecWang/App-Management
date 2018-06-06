@@ -1,6 +1,6 @@
 <template>
     <div class="card" style="width: 18rem;" >
-        <img class="card-img-top" :src="'http://192.168.1.113:8080/yong/' + cardData.image_Path"  alt="Card image cap">
+        <img class="card-img-top" :src="this.$store.state.url.url_prefix + cardData.image_Path"  alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title" style="margin-bottom: 0;">{{cardData.image_Name}}</h5>
         </div>

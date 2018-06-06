@@ -1,7 +1,7 @@
 <template>
     <div class="mt-3 mb-3">
         <div class="row">
-            <div style="text-align:center;" class="col-md-6">
+            <div style="text-align:left;" class="col-md-6">
                 <button class="btn" @click="prePage">上一页</button>
                 <span style="padding: 1rem;">{{currentPage}} / {{pageCount}}</span>
                 <button class="btn" @click="nextPage">下一页</button>

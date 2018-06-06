@@ -12,9 +12,6 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
 					</li>
-					<!-- <li class="nav-item">
-						<a class="nav-link" href="#/images/preview">图片管理</a>
-					</li> -->
 					<li class="nav-item">
 						<a class="nav-link" href="#/contracts/preview">合同管理</a>
 					</li>
@@ -26,6 +23,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#/problems/preview">问题数据库</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#/images/preview">图片管理</a>
 					</li>
 				</ul>
 				<!-- 登录注册 -->
@@ -43,7 +43,7 @@
 					<a class="nav-link" href="#/login">登录</a>
 				</span>
 				<span class="navbar-text">
-					<a class="nav-link" href="#/sign">注册</a>
+					<a class="nav-link" href="#/before">注册</a>
 				</span>
 			</div>
 		</nav>

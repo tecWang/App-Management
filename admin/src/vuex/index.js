@@ -9,17 +9,23 @@ const store = new Vuex.Store({
         auth: {
             IsLogin: false,
             showNav: false,
+            agreeSign: false,
             user: undefined,
             userID: undefined
         },
         url: {
-            // url_prefix: "http://192.168.1.113:8080/yong/"    // 生产环境地址
             url_prefix: "http://192.168.1.113:8080/admin/"       // 开发环境地址
         }
     },
     // 修改全局变量必须通过mutations中的方法
     // mutations只能采用同步方法
     mutations: {
+        agree(state){
+            state.auth.agreeSign = true;
+        },
+        disagree(state){
+            state.auth.agreeSign = false;
+        },
         login(state, obj) {
             state.auth.IsLogin = true;
             state.auth.showNav = true;

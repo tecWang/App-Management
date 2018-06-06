@@ -17,7 +17,7 @@
                             :itemData="item"
                             @toggleModal="showModal($event)"
                             ></item-problem>
-            <div :id="'collapse' + item.problem_ID" class="collapse row justify-content-md-center" data-parent="#accordion">
+            <div :id="'collapse' + item.problem_ID" class="collapse row justify-content-md-center tec-no-border" data-parent="#accordion">
                 <div class="col-md-8">
                     <pdf2 :pdfSrc="item.problem_Content"></pdf2>
                 </div>

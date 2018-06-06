@@ -96,9 +96,11 @@ export default {
                 userName: this.upload.userName,
                 user_simpleName: this.upload.user_simpleName,
                 user_sex: 0,
-                user_organizeID: 1987443
+                // user_organizeID: 1986329 // 科利来
+                user_organizeID: 1987443    // 访客组织
             }, {emulateJSON: true}).then(res => {
                 alert(res.data.msg);
+                this.$router.push("/login");
             }, res => {
                 console.log("error");
             });

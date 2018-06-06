@@ -32,6 +32,7 @@ import Problem_detail from '@/components/module_problem/detail'
 // 注册登录模块
 import Login from '@/components/module_login/login'
 import Sign from '@/components/module_login/sign'
+import beforeSign from '@/components/module_login/beforeSign'
 
 Vue.use(Router); 
 
@@ -72,27 +73,39 @@ const vueRouter = new Router({
 			path: '/login', name: 'Login', component: Login
 		},{
 			path: '/sign', name: 'Sign', component: Sign
+		},{
+			path: '/before', name: 'beforeSign', component: beforeSign
 		}
 	]
 });  
 
 vueRouter.beforeEach(function (to, from, next) {
 	const auth = store.state.auth;
+	// 如果用户没有登录且没有本地缓存
 	if(!auth.user && !localStorage.getItem("user")){
-		if (to.path == '/login' || to.path == '/sign') {
+		if (to.path == '/login' || to.path == '/before') {
 			next();
-		} else {
+		}else if(to.path == '/sign' && auth.agreeSign){
+			next();
+		}else {
 			next('/login');
 		}
+	// 如果用户已经登录(靠登录界面 或 本地缓存)
 	} else if (localStorage.getItem("user") || auth.user){
 		// 利用本地信息进行登录
 		store.commit('login', {
 			userName: localStorage.getItem("user"),
 			userID: localStorage.getItem("userID")
 		});
-		if (to.path == '/login' || to.path == '/sign'){
+		if (to.path == '/login' || to.path == '/sign' || to.path == '/before'){
+			console.log('在已经登录的情况下发生的重定向跳转');
 			next('/contracts/preview');
+		}else{
+			console.log('在已经登录的情况下发生的正常跳转');
+			next();
 		}
+	}else{
+		console.log("意料之外的路由跳转方式被触发");
 		next();
 	}
 }); 
