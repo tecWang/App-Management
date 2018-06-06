@@ -13,7 +13,7 @@
                     <li class="list-group-item">乙方:{{cardData.contract_Party_B}} <span class="float-right oi oi-brush tec-button"  @click="tellFather('b')"></span></li>
                     <li class="list-group-item">起始时间:{{cardData.contract_BeginDate}} <span class="float-right oi oi-brush tec-button"  @click="tellFather('bd')"></span></li>
                     <li class="list-group-item">到期时间:{{cardData.contract_EndDate}} <span class="float-right oi oi-brush tec-button"  @click="tellFather('ed')"></span></li>
-                    <li class="list-group-item">到期时间:{{cardData.contract_Value}} <span class="float-right oi oi-brush tec-button"  @click="tellFather('val')"></span></li>
+                    <li class="list-group-item">合同价格:{{cardData.contract_Value}} <span class="float-right oi oi-brush tec-button"  @click="tellFather('val')"></span></li>
                 </ul>
             </div>
         </div>

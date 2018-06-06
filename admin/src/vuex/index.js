@@ -9,8 +9,8 @@ const store = new Vuex.Store({
         auth: {
             IsLogin: false,
             showNav: false,
-            user: "王佳文",
-            userID: "1986628"
+            user: undefined,
+            userID: undefined
         },
         url: {
             // url_prefix: "http://192.168.1.113:8080/yong/"    // 生产环境地址
@@ -21,7 +21,6 @@ const store = new Vuex.Store({
     // mutations只能采用同步方法
     mutations: {
         login(state, obj) {
-            console.log(obj.userName + "   " + obj.userID);
             state.auth.IsLogin = true;
             state.auth.showNav = true;
             state.auth.user = obj.userName;

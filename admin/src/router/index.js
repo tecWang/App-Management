@@ -78,13 +78,18 @@ const vueRouter = new Router({
 
 vueRouter.beforeEach(function (to, from, next) {
 	const auth = store.state.auth;
-	if(!auth.IsLogin){
+	if(!auth.user && !localStorage.getItem("user")){
 		if (to.path == '/login' || to.path == '/sign') {
 			next();
 		} else {
 			next('/login');
 		}
-	}else if(auth.IsLogin){
+	} else if (localStorage.getItem("user") || auth.user){
+		// 利用本地信息进行登录
+		store.commit('login', {
+			userName: localStorage.getItem("user"),
+			userID: localStorage.getItem("userID")
+		});
 		if (to.path == '/login' || to.path == '/sign'){
 			next('/contracts/preview');
 		}

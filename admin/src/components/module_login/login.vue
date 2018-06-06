@@ -42,8 +42,9 @@ export default {
                         userName: response.data.name, 
                         userID: response.data.userID
                     });    // 登录， 修改IsLogin为 true
+                    localStorage.setItem("user", response.data.name);
+                    localStorage.setItem("userID", response.data.userID);
                     this.$router.push("/contracts/preview");
-                    console.log(this.$store.state);
                 }else {
                     alert(response.data.data);
                 }
