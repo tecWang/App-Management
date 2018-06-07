@@ -1,0 +1,31 @@
+/* 鼠标hover效果 */
+.tec-item-active{
+    cursor: pointer;
+}
+.tec-item-active:hover {
+    color: red;
+}
+
+/* 字符严重程度 */
+.tec-warn {
+    color: orange;
+}
+.tec-danger {
+    color: orangered;
+}
+.tec-deep-danger {
+    color: red;
+}
+.tec-invalid {
+    color: gray;
+}
+
+/* 去除列表边框 */
+.tec-no-border {
+    border: none;
+}
+
+/* 间距控制 */
+.tec-padding-right {
+    padding-right: 2rem;
+}

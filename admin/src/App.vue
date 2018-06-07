@@ -80,12 +80,6 @@ export default {
 </script>
 
 <style>
-	.visible {
-		visibility: visible;
-	}
-	.invisible {
-		visibility: hidden;
-	}
 	body, html { 
 		min-height:101%;
 	}
