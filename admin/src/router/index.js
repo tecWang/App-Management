@@ -10,7 +10,12 @@ import Image_Add from '@/components/module_image/add'
 // 合同模块路由
 import Tab_contract from '@/components/module_contract/Tab_contract'  
 import Contract_Preview from '@/components/module_contract/preview'    
-import Contract_Add from '@/components/module_contract/add'    
+import Contract_Add from '@/components/module_contract/add'  
+
+// 图书模块路由
+import Tab_book from '@/components/module_book/Tab_book'    
+import Book_preview from '@/components/module_book/preview'   
+import Book_detail from '@/components/module_book/detail'    
 
 // 零碎信息记录模块
 import Tab_tiny from  "@/components/module_tiny/Tab_tiny"
@@ -49,6 +54,12 @@ const vueRouter = new Router({
 			children: [
 				{ path: '/contracts/preview', component: Contract_Preview },
 				{ path: '/contracts/add', component: Contract_Add }
+		]},
+		{
+			path: '/books', name: 'Tab_book', component: Tab_book,
+			children: [
+				{ path: '/books/preview', component: Book_preview },
+				{ path: '/books/detail', name: 'Book_detail', component: Book_detail },
 		]},
 		{
 			path: '/projects', name: 'Tab_Project', component: Tab_Project,

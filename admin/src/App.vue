@@ -15,6 +15,9 @@
 					<li class="nav-item">
 						<a class="nav-link" href="#/contracts/preview">合同管理</a>
 					</li>
+					<li class="nav-item" v-if="$store.state.auth.user == '王佳文'">
+						<a class="nav-link" href="#/books/preview">图书阅读</a>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#/projects/preview">项目管理</a>
 					</li>
