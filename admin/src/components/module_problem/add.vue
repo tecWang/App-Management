@@ -1,17 +1,32 @@
 <template>
     <div>
         <tec-split></tec-split>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">问题名称</span>
+        <h5 style="color: red;">请先上传附件后再提交问题，否则可能会无法成功提交问题</h5>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">问题名称</label>
+                <input type="text" class="form-control" id="inputEmail4" v-model="p_name">
             </div>
-            <input type="text" class="form-control" v-model="p_name" placeholder="插件无法正常调用...">
         </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="p_desc">问题描述</label>
+                <input type="text" class="form-control" id="p_desc" v-model="p_desc">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="p_solve">解决办法</label>
+                <input type="text" class="form-control" id="p_solve" v-model="p_solve">
+            </div>
+        </div>
+
+
+        <h5 style="color: red;">建议上传横板office格式，竖版影响预览体验</h5>
         <tec-upload :range="'file'" @uploadSuccess="getReturnedData($event)"></tec-upload>
         
-        <div style="text-align: cen ter;">
+        <div style="text-align: center;">
             <button class="btn btn-primary" @click="uploadProblem">确定</button>
         </div>
+        
     </div>
 </template>
 
@@ -25,6 +40,8 @@ export default {
     data(){
         return {
             p_id: "",
+            p_desc: "",
+            p_solve: "",
             p_name: "",
             p_person: ""
         }
@@ -41,10 +58,13 @@ export default {
             this.$http.post(this.$store.state.url.url_prefix + "ProblemServlet",{
                 p_id: this.p_id,
                 p_name: this.p_name,
+                p_desc: this.p_desc,
+                p_solve: this.p_solve,
                 p_person: this.$store.state.auth.user,
                 p_personID: this.$store.state.auth.userID
             },{emulateJSON: true}).then(response => {
-                console.log(response.data);
+                alert(response.data.msg);
+                this.$router.push("/problems/preview");
             }, response => {
                 console.log("error");
             });

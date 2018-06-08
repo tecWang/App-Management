@@ -4,7 +4,7 @@
         2. 上传后有回调函数可以拿到上传文件的信息
     -->
     <div>
-        <form class="input-group mb-3" id="tecForm" target="nm_iframe"  :action="this.$store.state.url.url_prefix + 'UploadServlet'"  
+        <form class="input-group mb-3 mt-3" id="tecForm" target="nm_iframe"  :action="this.$store.state.url.url_prefix + 'UploadServlet'"  
             method="post" enctype="multipart/form-data">  
             <input type="text" name="fileType" v-model="fileRange" style="display:none;"> 
             <div class="custom-file">
@@ -14,6 +14,7 @@
             <div class="input-group-append">
                 <input type="submit"> 
             </div>
+            
         </form>
         <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe> 
     </div>

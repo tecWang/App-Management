@@ -3,8 +3,8 @@
         <div class="row border-top border-left border-right tec-item-problem">
             <span class="col-md-1 border-right" style="text-align: center;">问题ID</span>
             <span class="col-md-4 col-12 border-right" style="text-align: center;">问题标题</span>
-            <span class="col-md-3 border-right" style="text-align: center;">最后修改时间</span>
-            <span class="col-md-3 border-right" style="text-align: center;">问题发起人</span>
+            <span class="col-md-3 border-right" style="text-align: center;">问题描述</span>
+            <span class="col-md-3 border-right" style="text-align: center;">问题解决</span>
             <span class="col-md-1" style="text-align: center;">功能</span>
         </div>
 

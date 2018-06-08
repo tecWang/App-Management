@@ -1,5 +1,6 @@
 <template>
-    <div data-attr="title" class="row border-top border-left border-right tec-item-problem">
+    <div data-attr="title" 
+        class="row border-top border-left border-right tec-item-problem">
         <span class="col-md-1 border-right" style="text-align: center;">
             {{item.problem_ID | replaceBlankValue}}
         </span>
@@ -8,11 +9,17 @@
             {{item.problem_Name | replaceBlankValue}}
         </span>
         <span class="col-md-3 border-right" style="text-align: center;">
-            {{item.problem_Last_Modify | replaceBlankValue}}
+            {{item.problem_Desc | replaceBlankValue}}
         </span>
+        <!-- <span class="col-md-3 border-right" style="text-align: center;">
+            {{item.problem_Last_Modify | replaceBlankValue}}
+        </span> -->
         <span class="col-md-3 border-right" style="text-align: center;">
+            {{item.problem_Solve | replaceBlankValue}}
+        </span>
+        <!-- <span class="col-md-3 border-right" style="text-align: center;">
             {{item.problem_Owner | replaceBlankValue}}
-            </span>
+        </span> -->
         <span class="col-sm-1 tec-item-active" style="text-align: center;"
             @click="callPreviewTool()" onselectstart="return false;">预览</span>
     </div>

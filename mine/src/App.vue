@@ -5,7 +5,7 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="navbar-brand" href="#/contracts/preview">管理后台</a>
+			<a class="navbar-brand" href="#/sales/preview">竞拍</a>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<!-- 模块名称 -->
 				<ul class="navbar-nav mr-auto">
@@ -13,19 +13,7 @@
 						<a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#/contracts/preview">合同管理</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#/projects/preview">项目管理</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#/tinys/preview">零碎信息记录</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#/problems/preview">问题数据库</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#/images/preview">图片管理</a>
+						<a class="nav-link" href="#/sales/preview">Name</a>
 					</li>
 				</ul>
 				<!-- 登录注册 -->
@@ -59,6 +47,20 @@ import store from "./vuex/index.js"
 export default {
   name: 'App',
   store,
+  methods: {
+	  logout(){
+		  alert("logout");
+			this.$store.commit("logout");
+			localStorage.removeItem("user");
+			localStorage.removeItem("userID");
+			this.$router.push("/login");
+	  }
+  },
+  mounted(){
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+  },
   components: {
     "tec-split": Split
   }
