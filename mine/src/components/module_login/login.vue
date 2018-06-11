@@ -44,7 +44,7 @@ export default {
                     });    // 登录， 修改IsLogin为 true
                     localStorage.setItem("user", response.data.name);
                     localStorage.setItem("userID", response.data.userID);
-                    this.$router.push("/contracts/preview");
+                    this.$router.push("/sales/preview");
                 }else {
                     alert(response.data.data);
                 }

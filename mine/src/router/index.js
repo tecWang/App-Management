@@ -7,6 +7,7 @@ import sign from '@/components/module_login/sign'
 import before from '@/components/module_login/beforeSign'
 import module_sale from '@/components/module_sale/module_sale'
 import sale_preview from '@/components/module_sale/sale_preview'
+import sale_detail from '@/components/module_sale/sale_detail'
 
 Vue.use(Router)
 
@@ -17,7 +18,8 @@ const vueRouter = new Router({
 		{ path: '/login', name: 'login', component: login },
 		{ path: '/sales', name: 'module_sale', component: module_sale,
 			children: [
-				{ path: '/sales/preview', component: sale_preview}
+				{ path: '/sales/preview', component: sale_preview},
+				{ path: '/sales/detail', name: 'sale_detail',component: sale_detail,}
 			]
 		},
 	]

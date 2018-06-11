@@ -11,7 +11,8 @@ const store = new Vuex.Store({
             showNav: false,
             agreeSign: false,
             user: undefined,
-            userID: undefined
+            userID: undefined,
+            orgID: '9407'
         },
         url: {
             url_prefix: "http://192.168.1.113:8080/admin/"       // 开发环境地址
