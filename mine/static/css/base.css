@@ -29,3 +29,14 @@
 .tec-padding-right {
     padding-right: 2rem;
 }
+
+/* 颜色控制 */
+.tec-font-red {
+    color: red;
+}
+.tec-font-blue {
+    color: blue;
+}
+.tec-font-bold {
+    font-weight: 700;
+}

@@ -33,7 +33,7 @@
 				</ul>
 				<!-- 登录注册 -->
 				<span 	class="navbar-text tec-item-active" 
-						@click="logout"
+						@click="logout" id="loggou"
 						data-toggle="tooltip" data-placement="bottom" 
                     	title="注销"
 						>{{$store.state.auth.user}}</span>
@@ -64,7 +64,7 @@ export default {
   store,
   methods: {
 	  	logout(){
-			alert("logout");
+			$("#loggou").tooltip("hide");
 			this.$store.commit("logout");
 			localStorage.removeItem("user");
 			localStorage.removeItem("userID");
@@ -72,9 +72,7 @@ export default {
 		}
   },
   mounted(){
-		$(function () {
-			$('[data-toggle="tooltip"]').tooltip()
-		})
+		$('#loggou').tooltip();
   },
   components: {
     "tec-split": Split
