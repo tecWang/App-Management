@@ -125,11 +125,12 @@ export default {
                 }
             }, 1000);
         },
+        // 拿到项目基本数据
         getSummaryData(p_id){
             this.$http.get(this.$store.state.url.url_prefix 
             + "BitServlet?requestType=preview&scope=exact&p_id=" 
             + p_id).then(res => {
-                if(res.data.data.length != 0){
+                if(res.data.data != undefined){
                     this.routerData = res.data.data;
                     this.getSummarySuccess = true;
                 }
@@ -150,6 +151,7 @@ export default {
                 console.log("error");
             });
         },
+        // 项目开标
         openPrice(){
             this.$http.post(this.$store.state.url.url_prefix 
             + "BitServlet", {
@@ -157,16 +159,20 @@ export default {
                 statusType: "finish",
                 p_id: this.p_id
             }, {emulateJSON: true}).then(res => {
+                console.log(res.data);
                 this.remainDate = '00天 00时 00分 00秒';
+                // 重新获取本页数据
                 this.getSummaryData(this.p_id);
                 this.getPriceData(this.p_id);
             }, res => {
                 console.log("error");
             });
         },
+        // 磋商议价
         bargain(){
             alert("实现方案待定");
         },
+        // 项目流拍
         losePrice(){
             this.$http.post(this.$store.state.url.url_prefix 
             + "BitServlet", {
@@ -174,11 +180,15 @@ export default {
                 statusType: "lose",
                 p_id: this.p_id
             }, {emulateJSON: true}).then(res => {
+                console.log(res.data);
                 this.remainDate = '00天 00时 00分 00秒';
+                // 重新获取本页数据
+                this.getSummaryData(this.p_id);
+                this.getPriceData(this.p_id);
             }, res => {
                 console.log("error");
             });
-        }
+        },
     }
 }
 </script>

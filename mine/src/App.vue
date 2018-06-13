@@ -43,7 +43,7 @@
 <script>
 import Split from "./components/split.vue"
 import store from "./vuex/index.js"
-
+// localStorage.setItem("user", 'wang');
 export default {
   name: 'App',
   store,
@@ -51,8 +51,11 @@ export default {
 	  logout(){
 			$('#logout').tooltip('hide')
 			this.$store.commit("logout");
+
 			localStorage.removeItem("user");
 			localStorage.removeItem("userID");
+			localStorage.removeItem("checkState");
+			
 			this.$router.push("/login");
 	  }
   },

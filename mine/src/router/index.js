@@ -29,26 +29,28 @@ vueRouter.beforeEach(function (to, from, next) {
 	const auth = store.state.auth;
 	// 如果用户没有登录且没有本地缓存
 	if (!auth.user && !localStorage.getItem("user")) {
+	// if (!auth.checkState && !localStorage.getItem("checkState")) {
 		if (to.path == '/login' || to.path == '/before') {
-		next();
+			next();
 		} else if (to.path == '/sign' && auth.agreeSign) {
-		next();
+			next();
 		} else {
-		next('/login');
+			next('/login');
 		}
 		// 如果用户已经登录(靠登录界面 或 本地缓存)
 	} else if (localStorage.getItem("user") || auth.user) {
+	// } else if (localStorage.getItem("checkState") || auth.checkState) {
 		// 利用本地信息进行登录
 		store.commit('login', {
-		userName: localStorage.getItem("user"),
-		userID: localStorage.getItem("userID")
+			userName: localStorage.getItem("user"),
+			userID: localStorage.getItem("userID")
 		});
 		if (to.path == '/login' || to.path == '/sign' || to.path == '/before') {
-		console.log('在已经登录的情况下发生的重定向跳转');
-		next('/sales/preview');
+			console.log('在已经登录的情况下发生的重定向跳转');
+			next('/sales/preview');
 		} else {
-		console.log('在已经登录的情况下发生的正常跳转');
-		next();
+			console.log('在已经登录的情况下发生的正常跳转');
+			next();
 		}
 	} else {
 		console.log("意料之外的路由跳转方式被触发");

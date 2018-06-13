@@ -34,7 +34,7 @@
                     :data-disable="checkStatus(item.project_StopPriceDate, item.project_ID)"
                     @mouseenter="getPriceBitted(item.project_ID)"
                     data-toggle="tooltip" data-placement="left" title="尚未参与竞标"
-                    @click="bitForThis(item.project_ID)">竞价</button></td>
+                    @click="bitForThis(item.project_StopPriceDate, item.project_ID)">竞价</button></td>
             </tr>
 
 
@@ -149,12 +149,13 @@ export default {
             // 先检查是否超过竞标截止日期
             let dateNow = new Date().getTime();
             let dateStop = new Date(date).getTime();
+            console.log("diff: " + (dateNow - dateStop));
             if((dateNow - dateStop) > 0){
-                // console.log("id: " + id + ", 超时");
-                $("#btn" + id).html("已超时");
+                console.log("id: " + id + ", 超时");
                 $("#btn" + id).attr("disabled",true);
+                $("#btn" + id).html("已超时");
             }else{
-                // console.log("id: " + id + ", 不超时");
+                console.log("id: " + id + ", 不超时");
                 // 现在的时间还没到截止日期, 则查看是否已经参与竞价
                 this.IsBittedAlready(id);
             }
@@ -193,21 +194,34 @@ export default {
             });
         },
         // 召开蒙版并绑定好上次用户报过的价格
-        bitForThis(p_id){
-            $("#btn" + p_id).tooltip("hide");
-            sessionStorage.setItem("p_id", p_id);
-            this.$http.get(this.$store.state.url.url_prefix 
-                + "BitServlet?requestType=preview&scope=price"
-                + "&p_id=" + p_id + "&userID=" + this.$store.state.auth.userID)
-            .then(res => {
-                if(res.data.data != undefined){
-                    // alert("已经参与过竞价了");
-                }else{
-                    $('#model').modal('toggle');
-                }
-            }, res => {
-                console.log("error");
-            });
+        bitForThis(date, p_id){
+            $("#btn" + p_id).tooltip("hide");           // 隐藏左部提示栏
+            sessionStorage.setItem("p_id", p_id);       // 准备好项目id供submitNewPrice调用
+            
+            // 第二次检验是否超过截止时间，防止出现加载失误按钮没有disable 的情况
+            let dateNow = new Date().getTime();
+            let dateStop = new Date(date).getTime();
+            if((dateNow - dateStop) > 0){
+                // console.log("id: " + id + ", 超时");
+                $("#btn" + p_id).attr("disabled",true);
+                $("#btn" + p_id).html("已超时");
+            }else{
+                // 如果没有超时，判断是否已经参与过竞价
+                this.$http.get(this.$store.state.url.url_prefix 
+                    + "BitServlet?requestType=preview&scope=price"
+                    + "&p_id=" + p_id + "&userID=" + this.$store.state.auth.userID)
+                .then(res => {
+                    if(res.data.data != undefined){
+                        // alert("已经参与过竞价了");
+                    }else{
+                        $('#model').modal('show'); 
+                    }
+                }, res => {
+                    console.log("error");
+                });
+            }
+
+            
         },
         // 提交新价格
         submitNewPrice(){
