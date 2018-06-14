@@ -259,8 +259,7 @@ export default {
         // 跳转到详情页
         seeDetail(item){
             // 此处新增一层验证，只有管理员可以访问
-            if(this.$store.state.auth.user == '管理员' && 
-               this.$store.state.auth.userID == 6687 ){
+            if(this.$store.state.auth.role == "admin"){
                 this.$router.push({
                     name: 'sale_detail',
                     params: { 

@@ -43,7 +43,8 @@ vueRouter.beforeEach(function (to, from, next) {
 		// 利用本地信息进行登录
 		store.commit('login', {
 			userName: localStorage.getItem("user"),
-			userID: localStorage.getItem("userID")
+			userID: localStorage.getItem("userID"),
+			role: localStorage.getItem("role")
 		});
 		if (to.path == '/login' || to.path == '/sign' || to.path == '/before') {
 			console.log('在已经登录的情况下发生的重定向跳转');

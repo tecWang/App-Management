@@ -60,11 +60,13 @@ export default {
                     // 跟新本地vuex状态
                     this.$store.commit('login', {
                         userName: user, 
-                        userID: userID
-                    });    // 登录， 修改IsLogin为 true
+                        userID: userID,
+                        role: "saler"
+                    });
 
                     localStorage.setItem("user", this.$store.state.auth.user);
                     localStorage.setItem("userID", this.$store.state.auth.userID);
+                    localStorage.setItem("role", "saler");
                     localStorage.setItem("checkState", 1);
                     
                     this.$router.push("/sales/preview");
@@ -88,11 +90,13 @@ export default {
                     // 跟新本地vuex状态
                     this.$store.commit('login', {
                         userName: user, 
-                        userID: userID
-                    });    // 登录， 修改IsLogin为 true
+                        userID: userID,
+                        role: "admin"
+                    });
 
                     localStorage.setItem("user", this.$store.state.auth.user);
                     localStorage.setItem("userID", this.$store.state.auth.userID);
+                    localStorage.setItem("role", "admin");
                     localStorage.setItem("checkState", 1);
                     
                     this.$router.push("/sales/preview");
@@ -116,17 +120,16 @@ export default {
                     console.log("组织ID: " + res.data.org);
                     // 访客 9407 煤矿 9410
                     if(res.data.org == 9407){
-                        // 验证用户身份信息正确后开始验证是否已经通过审核
+                        // 供应商
                         this.checkSalerStatus(user, userID);
                     }else if(res.data.org == 9410){
-                        // alert("煤矿管理员用户暂不可登录！");
+                        // 煤矿管理员
                         this.checkAdminStatus(user, userID);
                     }else{
                         // 管理员
                         localStorage.setItem("user", user);
                         localStorage.setItem("userID", userID);
                         localStorage.setItem("checkState", 1);
-                        
                         this.$router.push("/sales/preview");
                     }
                 }else {

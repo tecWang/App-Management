@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="container-fluid">
-    	<nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="$store.state.auth.showNav">
+    	<nav class="navbar navbar-expand-lg navbar-light bg-light" 
+			v-if="$store.state.auth.showNav">
 			<!-- 返回主页 -->
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -20,11 +21,12 @@
 				<span 	class="navbar-text tec-item-active" 
 						@click="logout" id="logout"
 						data-toggle="tooltip" data-placement="bottom" 
-                    	title="注销"
+						title="注销"
 						>{{$store.state.auth.user}}</span>
 			</div>
 		</nav>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light" v-else>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light" 
+			v-else>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<!-- 登录注册 -->
 				<span class="navbar-text">
@@ -43,7 +45,6 @@
 <script>
 import Split from "./components/split.vue"
 import store from "./vuex/index.js"
-// localStorage.setItem("user", 'wang');
 export default {
   name: 'App',
   store,
@@ -55,6 +56,7 @@ export default {
 			localStorage.removeItem("user");
 			localStorage.removeItem("userID");
 			localStorage.removeItem("checkState");
+			localStorage.removeItem("role");
 			
 			this.$router.push("/login");
 	  }

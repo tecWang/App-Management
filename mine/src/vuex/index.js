@@ -7,9 +7,9 @@ const store = new Vuex.Store({
     // 全局变量
     state: {
         auth: {
-            IsLogin: false,     // 是否已经登录
             showNav: false,     // 是否显示nav
             checkState: -1,     // 是否通过审核
+            role: undefined,
             user: undefined,
             userID: undefined,
 
@@ -23,18 +23,18 @@ const store = new Vuex.Store({
     // mutations只能采用同步方法
     mutations: {
         login(state, obj) {
-            state.auth.IsLogin = true;
             state.auth.showNav = true;
             state.auth.checkState = 1;
             state.auth.user = obj.userName;
             state.auth.userID = obj.userID;
+            state.auth.role = obj.role;
         },
         logout(state) {
-            state.auth.IsLogin = false;
             state.auth.showNav = false;
             state.auth.checkState = -1;
             state.auth.user = undefined;
             state.auth.userID = undefined;
+            state.auth.role = undefined;
         }
     }
 })
