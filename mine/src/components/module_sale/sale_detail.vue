@@ -13,10 +13,12 @@
 
 
         <li v-if="!getPriceSuccess" class="list-group-item">无人报价</li>
-        <li v-else v-for="item in items" :key="item.PRICE_ID"
-            class="list-group-item container-fluid">
+        <li v-else v-for="item in items" 
+            :key="item.PRICE_ID" :id="item.PRICE_ID"
+            class="list-group-item container-fluid tec-item-hover"
+            @click="chooseAsTarget(item.PRICE_ID)">
             <div class="row">
-                <div class="col">{{item.PRICE_USER | hiddenUser(routerData.project_OpenPriceDate)}} 在 {{item.PRICE_PRICE_DATE | parseDate}} 参与了竞标， 竞标金额为 {{item.PRICE_PRICE | hiddenPrice(routerData.project_OpenPriceDate)}}</div>
+                <div class="col">{{item.PRICE_USER | hiddenUser(openPriceSuccess)}} 在 {{item.PRICE_PRICE_DATE | parseDate}} 参与了竞标， 竞标金额为 {{item.PRICE_PRICE | hiddenPrice(openPriceSuccess)}}</div>
                 <div class="col align-self-end"
                     style="text-align: right;">
                     </div>
@@ -40,7 +42,7 @@ export default {
             routerData: {},     // 标的时间信息，如开标，停标，开标及名称
             remainDate: '00天 00时 00分 00秒',
             
-
+            openPriceSuccess: false,
             getPriceSuccess: false,
             getSummarySuccess: false
         }
@@ -49,9 +51,10 @@ export default {
         // 初始化倒计时
         this.updateTime();  
         // 绑定表单数据
-        if(this.$route.params.p_id != undefined){
+        if(this.$route.params.p_id){
             console.log("页面传参的值存在，不调用session");
             sessionStorage.setItem("p_id", this.$route.params.p_id);
+            this.p_id = this.$route.params.p_id;
             this.getSummaryData(this.$route.params.p_id);
             this.getPriceData(this.$route.params.p_id);
         }
@@ -61,6 +64,7 @@ export default {
                 this.p_id = sessionStorage.getItem("p_id");
                 this.getSummaryData(this.p_id);
                 this.getPriceData(this.p_id);
+                
             }
             else{
                 console.log("local session is not exists")
@@ -70,18 +74,14 @@ export default {
     filters: {
         // 不能调用this， 为undefined
         hiddenPrice(data, type){
-            let dateLast = new Date(type);
-            let dateNow = new Date();
-            if(dateNow < dateLast){ // 说明未到开标时间，暂不公布
+            if(!type){ // 说明未到开标时间，暂不公布
                 return "-----";
             }else {
                 return data;
             }
         },
         hiddenUser(data, type){
-            let dateLast = new Date(type);
-            let dateNow = new Date();
-            if(dateNow < dateLast){ // 说明未到开标时间，暂不公布
+            if(!type){ // 说明未到开标时间，暂不公布
                 return "xxxxxx";
             }else {
                 return data;
@@ -133,6 +133,9 @@ export default {
                 if(res.data.data != undefined){
                     this.routerData = res.data.data;
                     this.getSummarySuccess = true;
+                    if(this.routerData.project_Finish != 0){
+                        this.openPriceSuccess = true;
+                    }
                 }
             }, res => {
                 console.log("error");
@@ -146,6 +149,7 @@ export default {
                 if(res.data.data.length != 0){
                     this.items = res.data.data;
                     this.getPriceSuccess = true;
+                    
                 }
             }, res => {
                 console.log("error");
@@ -161,6 +165,7 @@ export default {
             }, {emulateJSON: true}).then(res => {
                 console.log(res.data);
                 this.remainDate = '00天 00时 00分 00秒';
+                this.openPriceSuccess = true;
                 // 重新获取本页数据
                 this.getSummaryData(this.p_id);
                 this.getPriceData(this.p_id);
@@ -182,6 +187,7 @@ export default {
             }, {emulateJSON: true}).then(res => {
                 console.log(res.data);
                 this.remainDate = '00天 00时 00分 00秒';
+                this.openPriceSuccess = true;
                 // 重新获取本页数据
                 this.getSummaryData(this.p_id);
                 this.getPriceData(this.p_id);
@@ -189,6 +195,30 @@ export default {
                 console.log("error");
             });
         },
+        // 挑选出最低价
+        chooseLowerPrice(){
+            let lowest = {
+                price: 999999,
+                index: 0
+            }
+            if(this.getPriceSuccess){
+                for(let i = 0; i < this.items.length; i++){
+                    if(this.items[i].PRICE_PRICE < lowest.price){
+                        lowest.price = this.items[i].PRICE_PRICE;
+                        lowest.index = this.items[i].PRICE_ID;
+                    }
+                }
+                $("#" + lowest.index).addClass("bg-success");
+            }else{
+                console.log("未获取到报价数据");
+            }
+        },
+        chooseAsTarget(p_id){
+            if(this.openPriceSuccess){
+                return ;
+            }
+            alert("要选择该供应商吗？");
+        }
     }
 }
 </script>

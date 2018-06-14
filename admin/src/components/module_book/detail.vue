@@ -1,7 +1,9 @@
 <template>
-    <div class="row justify-content-md-center">
-        <div class="col-md-12">
-            <pdf-book :pdfSrc="filePath"></pdf-book>
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-md-12">
+                <pdf-book :pdfSrc="filePath"></pdf-book>
+            </div>
         </div>
     </div>
 </template>

@@ -22,6 +22,12 @@ const store = new Vuex.Store({
     // 修改全局变量必须通过mutations中的方法
     // mutations只能采用同步方法
     mutations: {
+        agree(state) {
+            state.auth.agreeSign = true;
+        },
+        disagree(state) {
+            state.auth.agreeSign = false;
+        },
         login(state, obj) {
             state.auth.showNav = true;
             state.auth.checkState = 1;

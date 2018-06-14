@@ -1,9 +1,17 @@
 /* 鼠标hover效果 */
-.tec-item-active{
+.tec-item-active {
     cursor: pointer;
 }
 .tec-item-active:hover {
     color: red;
+}
+
+.tec-item-hover {
+    cursor: pointer;
+}
+.tec-item-hover:hover {
+    background-color:#f8f9fa;
+
 }
 
 /* 字符严重程度 */

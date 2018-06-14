@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container-fluid">
+  	<div id="app" class="container-fluid">
     	<nav class="navbar navbar-expand-lg navbar-light bg-light" 
 			v-if="$store.state.auth.showNav">
 			<!-- 返回主页 -->
@@ -39,7 +39,7 @@
 		</nav>
 		<tec-split></tec-split>
 		<router-view/>
-  </div>
+  	</div>
 </template>
 
 <script>

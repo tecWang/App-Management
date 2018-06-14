@@ -1,13 +1,15 @@
 <template>
+    <!-- 图书PDF预览 -->
     <div class="mt-3 mb-3">
         <div class="row">
-            <pdf class="col-md-6"
+            <pdf v-show="pageCount != 0" class="col-md-6 border"
                 :src="fileSrc"
                 ref="pdf"
                 :rotate = "rotate"
                 :page = "currentPage * 1"
                 @num-pages="pageCount = $event"
                 @page-loaded="currentPage = $event" ></pdf>
+            <span v-show="pageCount == 0" class="col-md-6 border">正在加载中，请稍后...</span>
             <div class="col-md-6 row align-items-center">
                 <div style="text-align:left; margin-top: 0;" class="col-md-8">
                     <button class="btn" @click="prePage">上一页</button>
@@ -46,6 +48,11 @@ export default {
     watch: {
         pdfSrc(val) {
             this.fileSrc = val;//新增result的watch，监听变更并同步到myResult上
+        },
+        pageCount(val){
+            if(val == 0){
+
+            }
         }
     },
     beforeMount(){

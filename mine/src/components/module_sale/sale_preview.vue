@@ -1,5 +1,5 @@
 <template>
-    <table class="table">
+    <table class="table" style="text-align: center;">
         <thead>
             <tr>
             <th scope="col">#</th>
@@ -7,7 +7,7 @@
             <th scope="col">开放报价时间</th>
             <th scope="col">截止报价时间</th>
             <th scope="col">开标时间</th>
-            <th scope="col">参与竞标</th>
+            <th v-show="$store.state.auth.role == 'saler'" scope="col">参与竞标</th>
             </tr>
         </thead>
         <tbody>
@@ -15,8 +15,9 @@
             <tr v-show="getDataError"><th>Error</th></tr>
 
             <!-- 未完成的竞标 -->
-            <tr><th colspan="6">正在进行的竞标</th></tr>
-            <tr v-show="!getDataError" v-for="item in items" :key="item.project_ID">
+            <tr style="text-align: left;"><th colspan="6">正在进行的项目</th></tr>
+            <tr v-show="!getDataError" v-for="item in items" 
+                :key="item.project_ID" class="tec-item-hover">
                 <!-- ID -->
                 <th scope="row">{{item.project_ID}}</th>
                 <!-- 标题 -->
@@ -29,25 +30,31 @@
                 <!-- 标的开标时间 -->
                 <td>{{item.project_OpenPriceDate | parseDate}}</td>
                 <!-- 供应商竞价按钮 -->
-                <td><button class="btn btn-sm" 
-                    :id="'btn' + item.project_ID"
-                    :data-disable="checkStatus(item.project_StopPriceDate, item.project_ID)"
-                    @mouseenter="getPriceBitted(item.project_ID)"
-                    data-toggle="tooltip" data-placement="left" title="尚未参与竞标"
-                    @click="bitForThis(item.project_StopPriceDate, item.project_ID)">竞价</button></td>
+                <td v-show="$store.state.auth.role == 'saler'">
+                    <button class="btn btn-sm" 
+                        :id="'btn' + item.project_ID"
+                        :data-disable="checkStatus(item.project_StopPriceDate, item.project_ID)"
+                        @mouseenter="getPriceBitted(item.project_ID)"
+                        data-toggle="tooltip" data-placement="left" title="尚未参与竞标"
+                        @click="bitForThis(item.project_StopPriceDate, item.project_ID)">竞价</button></td>
             </tr>
 
 
             <!-- 已完成的竞标 -->
-            <tr><th colspan="6">已完成的竞标</th></tr>
-            <tr v-show="!getDataError" v-for="item in itemsFinished" :key="item.project_ID">
+            <tr style="text-align: left;"><th colspan="6">已开标的项目</th></tr>
+            <tr v-show="!getDataError" v-for="item in itemsFinished" 
+                :key="item.project_ID" class="tec-item-hover">
                 <th scope="row">{{item.project_ID}}</th>
                 <td class="tec-item-active" :id="item.project_ID"
-                    @click="seeDetail(item)">{{item.project_Desc}}</td>
+                    @click="seeDetail(item)">
+                    <span>{{item.project_Desc}}</span>
+                    <span class="tec-font-red">( {{item.project_Finish | parseState}} )</span>
+                </td>
                 <td>{{item.project_BeginDate | parseDate}}</td>
                 <td>{{item.project_StopPriceDate | parseDate}}</td>
                 <td>{{item.project_OpenPriceDate | parseDate}}</td>
-                <td><button class="btn btn-sm" disabled>已完成</button></td>
+                <td v-show="$store.state.auth.role == 'saler'">
+                    <button class="btn btn-sm" disabled>已完成</button></td>
             </tr>
         </tbody>
         <div class="modal fade" id="model" tabindex="-1">
@@ -97,6 +104,7 @@ export default {
         this.getItmesFinished();
     },
     filters: {
+        // 解析数据库存储的日期为人们所习惯的日期
         parseDate(data){
             let date = new Date(data);
             let year = date.getFullYear();
@@ -114,6 +122,14 @@ export default {
                 second = '0' + second;
 
             return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+        },
+        // 解析项目进行状态
+        parseState(data){
+            if(data == 1){
+                return "顺利开标"
+            }else if(data == -1){
+                return "流拍"
+            }
         }
     },
     methods: {
@@ -176,6 +192,10 @@ export default {
         },
         // 鼠标hover时显示供应商竞标价格
         getPriceBitted(p_id){
+            // if(this.$store.state.auth.role == "admin"){
+            //     $("#btn" + p_id).attr("title",``);
+            //     return ;
+            // }
             this.$http.get(this.$store.state.url.url_prefix 
                 + "BitServlet?requestType=preview&scope=price"
                 + "&p_id=" + p_id + "&userID=" + this.$store.state.auth.userID)
@@ -198,6 +218,11 @@ export default {
             $("#btn" + p_id).tooltip("hide");           // 隐藏左部提示栏
             sessionStorage.setItem("p_id", p_id);       // 准备好项目id供submitNewPrice调用
             
+            // if(this.$store.state.auth.role == "admin"){
+            //     alert("管理员不可参与竞价");
+            //     return ;
+            // }
+
             // 第二次检验是否超过截止时间，防止出现加载失误按钮没有disable 的情况
             let dateNow = new Date().getTime();
             let dateStop = new Date(date).getTime();
@@ -205,6 +230,7 @@ export default {
                 // console.log("id: " + id + ", 超时");
                 $("#btn" + p_id).attr("disabled",true);
                 $("#btn" + p_id).html("已超时");
+                return ;
             }else{
                 // 如果没有超时，判断是否已经参与过竞价
                 this.$http.get(this.$store.state.url.url_prefix 
@@ -220,8 +246,6 @@ export default {
                     console.log("error");
                 });
             }
-
-            
         },
         // 提交新价格
         submitNewPrice(){
