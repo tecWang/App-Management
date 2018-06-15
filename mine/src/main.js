@@ -8,8 +8,11 @@ Vue.use(VueResource);
 
 
 // 导入样式文件
-import "./css/sass/custom.scss"
+import "./css/sass/index.scss"
 import "./css/base.css"
+
+// 导入js依赖文件
+
 
 Vue.config.productionTip = false
 
